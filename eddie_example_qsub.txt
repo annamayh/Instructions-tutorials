@@ -1,0 +1,24 @@
+#!/bin/sh
+# Grid engine options
+#$ -N gwas_1_402  # name of job, can be seen with qstat once started
+#$ -wd /exports/csce/eddie/biology/groups/pemberton/martin/sheep_ID/sheep_ID # (optional) working directory where script should be run
+#$ -l h_rt=05:00:00 # maximum running time
+#$ -M martin.adam.stoffel@gmail.com # your email address (optional)
+#$ -m beas #(optional) send mail to you when job started/finished/aborted (better make a seperate folder where these go in) (optional)
+#$ -l h_vmem=7G # memory per core (in this case 7*6 = 42GB overall available memory)
+#$ -t 1-402 #(advanced, optional) this is an array job. It will essentially send this script 402 times to the grid scheduler with the environmental variable $SGE_TASK_ID having value 1-402
+#$ -pe sharedmem 6 # number of cores
+#$ -o o_files/ # optional but good practice. Saves printed output from programs into files. You need to make the o_files folder in the working directory yourself beforehand
+#$ -e e_files/ # also optional. Saves errors into files. You need to make a folder e_files beforehand again.
+
+# Initialise the environment modules (necessary whenever you use module load)
+. /etc/profile.d/modules.sh
+
+# load R # you need to make any software you use available using module load. Check available software with `module avail` on eddie
+module load R/3.5.3
+
+# runs an Rscript and passes it the environmental variable $SGE_TASK_ID . Good for GWAS.
+Rscript 6_alt_gwas_annual_survival.R $SGE_TASK_ID
+
+
+######### WHEN CREATING SHELL FILE ON WINDOWS USE : dos2unix <filename> TO CONVERT TO UNIX FORMAT #################
