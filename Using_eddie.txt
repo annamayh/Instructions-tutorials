@@ -1,0 +1,37 @@
+### USING EDDIE ###
+
+login using PuTTy to: eddie.ecdf.ed.ac.uk and type password and username 
+NAVIGATING THROUGH EDDIE 
+- cd <folder> : changes the folder 
+- cd .. : back a folder
+- ls : lists all files in the directory 
+- pwd : print working directory 
+- qsub : submit shell file to job list
+- qstat : stats of current jobs (r = running, eqw = error queue waiting, qw = queue waiting)
+- qdel : delete job 
+
+(See other file for example shell script, remember to convert to linux file type before sumitting)
+
+login to WinSCP in the same way - use this to move files between the computer and eddie folder 
+
+
+##Interactive sessions## - for when need to run e.g. R interactivly 
+
+- To start simple interactive session : $qlogin 
+- Starting with specifying amount of memory or time longer than 48 hrs: 
+	$qlogin -pe interactivemem <NUMBER OF CORES> -l h_vmem=<MEMORY PER CORE>
+	$qlogin -l h_rt=HH:MM:SS
+- Reconnecting to interactive session: once logged into eddie type: 'screen' and make note of login node, then can qlogin
+When logging back into eddie login to specific node e.g. ssh login04-ext.ecdf.ed.ac.uk (for login04)
+<$screen -ls>
+output: There is a screen on: 133133.pts-190.login04 (Detached)>
+For the above example this would be:
+<$ screen -r 133133.pts-190.login04>
+
+# loading R# can type directly into interactive session or just type module load in shell script 
+$module load R
+$R 
+#installing and loading packages# done in the same way as in normal R but will need to install package interactivly either in qlogin or in command line i.e. not through the shell script
+
+
+More info on edinburgh wiki: https://www.wiki.ed.ac.uk/pages/viewpage.action?spaceKey=ResearchServices&title=Interactive+Sessions 
