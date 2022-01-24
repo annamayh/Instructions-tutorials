@@ -20,5 +20,7 @@ module load R/3.5.3
 # runs an Rscript and passes it the environmental variable $SGE_TASK_ID . Good for GWAS.
 Rscript 6_alt_gwas_annual_survival.R $SGE_TASK_ID
 
+#install packages on server
+sudo su - -c "R -e \"install.packages('devtools', repos='http://cran.rstudio.com/')\""
 
 ######### WHEN CREATING SHELL FILE ON WINDOWS USE : dos2unix <filename> TO CONVERT TO UNIX FORMAT #################
